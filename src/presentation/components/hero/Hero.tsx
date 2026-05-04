@@ -15,7 +15,7 @@ export function Hero({}: HeroProps) {
         <div className="grid grid-cols-1 max-w-10/12 lg:max-w-11/12 h-full mx-auto items-center">
           <div className="space-y-4 lg:space-y-6">
             <h1 className="font-heading tracking-tighter text-7xl lg:text-8xl">
-              <TextAnimate mode="letters" className="font-thin leading-[1.15em]">Soluciones Tech para</TextAnimate><br/>
+              <TextAnimate mode="letters" className="font-thin leading-[1.15em]">Soluciones Tech</TextAnimate><br/>
               <TextAnimate mode="letters" className="font-light leading-[1.15em]" delay={.25}>Profesionales</TextAnimate>
             </h1>
             <p className="text-base lg:text-xl font-light max-w-lg">
