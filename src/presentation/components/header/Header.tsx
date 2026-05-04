@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion'
-import { MdOutlineMailOutline } from "react-icons/md";
 import { TextAnimate } from '../text-pull-up'
 import type { HeaderProps } from './Header.types'
 
