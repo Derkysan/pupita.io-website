@@ -18,7 +18,7 @@ export function Hero({}: HeroProps) {
               <TextAnimate mode="letters" className="font-thin leading-[1.15em]">Soluciones Tech</TextAnimate><br/>
               <TextAnimate mode="letters" className="font-light leading-[1.15em]" delay={.25}>Profesionales</TextAnimate>
             </h1>
-            <p className="text-base lg:text-xl font-light max-w-lg">
+            <p className="text-base lg:text-xl font-light">
               <TextAnimate delay={.5}>Diseñamos & construimos herramientas y productos para profesionales.</TextAnimate>
             </p>
           </div>
