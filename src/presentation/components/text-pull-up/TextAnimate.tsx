@@ -26,10 +26,19 @@ const flattenToString = (node: React.ReactNode): string => {
   return ''
 }
 
+type LetterGroup =
+  | { isSpace: true; text: string }
+  | { isSpace: false; chars: string[] }
+
+const splitLettersGrouped = (text: string): LetterGroup[] =>
+  text.split(/(\s+)/).filter((t) => t.length > 0).map((token) =>
+    /^\s+$/.test(token)
+      ? { isSpace: true, text: token }
+      : { isSpace: false, chars: Array.from(token) }
+  )
+
 const splitWords = (text: string) =>
   text.split(/(\s+)/).filter((token) => token.length > 0)
-
-const splitLetters = (text: string) => Array.from(text)
 
 export const TextAnimate: React.FC<TextAnimateProps> = ({
   children,
@@ -49,7 +58,6 @@ export const TextAnimate: React.FC<TextAnimateProps> = ({
 }) => {
   const resolvedStagger = stagger ?? (mode === 'letters' ? 0.03 : 0.07)
   const text = flattenToString(children).replace(/\s+/g, ' ').trim()
-  const tokens = mode === 'words' ? splitWords(text) : splitLetters(text)
 
   const containerVariants: Variants = {
     hidden: {},
@@ -83,6 +91,18 @@ export const TextAnimate: React.FC<TextAnimateProps> = ({
           animate: 'visible' as const,
         }
 
+  const renderLetter = (char: string, key: React.Key) => (
+    <span
+      key={key}
+      aria-hidden="true"
+      className={cn('inline-block align-bottom', clip && 'overflow-hidden')}
+    >
+      <motion.span variants={itemVariants} className={cn('inline-block', itemClassName)}>
+        {char}
+      </motion.span>
+    </span>
+  )
+
   return (
     <motion.span
       variants={containerVariants}
@@ -90,29 +110,32 @@ export const TextAnimate: React.FC<TextAnimateProps> = ({
       className={cn('inline-block', className)}
       aria-label={text}
     >
-      {tokens.map((token, index) => {
-        if (/^\s+$/.test(token)) {
-          return (
-            <span key={index} aria-hidden="true" style={{ whiteSpace: 'pre' }}>
-              {token}
-            </span>
+      {mode === 'letters'
+        ? splitLettersGrouped(text).map((group, gi) =>
+            group.isSpace ? (
+              <span key={`s${gi}`} aria-hidden="true">{' '}</span>
+            ) : (
+              // whitespace-nowrap keeps all letters of a word on the same line
+              <span key={`w${gi}`} aria-hidden="true" style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+                {group.chars.map((char, ci) => renderLetter(char, `${gi}-${ci}`))}
+              </span>
+            )
           )
-        }
-        return (
-          <span
-            key={index}
-            aria-hidden="true"
-            className={cn('inline-block align-bottom', clip && 'overflow-hidden')}
-          >
-            <motion.span
-              variants={itemVariants}
-              className={cn('inline-block', itemClassName)}
-            >
-              {token}
-            </motion.span>
-          </span>
-        )
-      })}
+        : splitWords(text).map((token, i) =>
+            /^\s+$/.test(token) ? (
+              <span key={i} aria-hidden="true">{' '}</span>
+            ) : (
+              <span
+                key={i}
+                aria-hidden="true"
+                className={cn('inline-block align-bottom', clip && 'overflow-hidden')}
+              >
+                <motion.span variants={itemVariants} className={cn('inline-block', itemClassName)}>
+                  {token}
+                </motion.span>
+              </span>
+            )
+          )}
     </motion.span>
   )
 }

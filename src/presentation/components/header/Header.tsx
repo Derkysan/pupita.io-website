@@ -1,5 +1,7 @@
+import { MdOutlineMailOutline } from 'react-icons/md';
 import { TextAnimate } from '../text-pull-up'
 import type { HeaderProps } from './Header.types'
+import { motion } from 'framer-motion';
 
 export function Header({ logo = 'pupita.io', right, className = '' }: HeaderProps) {
   return (
@@ -8,9 +10,9 @@ export function Header({ logo = 'pupita.io', right, className = '' }: HeaderProp
         <div className="uppercase tracking-widest font-bold">
           <TextAnimate mode="letters" stagger={0.04}>{logo}</TextAnimate>
         </div>
-        {/* <div className="flex ml-auto">
+        <div className="flex ml-auto">
           <motion.a
-            href="mailto:"
+            href="mailto:pupita.dev@gmail.com"
             className="w-8 flex items-center justify-center rounded-full aspect-square text-gray-700 hover:text-gray-900 hover:bg-gray-100 hover:scale-125 transition-all ease-in-out"
             initial={{ opacity: 0, scale: 0.25 }}
             animate={{ opacity: 1, scale: 1.1 }}
@@ -18,7 +20,7 @@ export function Header({ logo = 'pupita.io', right, className = '' }: HeaderProp
           >
             <MdOutlineMailOutline />
           </motion.a>
-        </div> */}
+        </div>
         {right && <div className="ml-auto">{right}</div>}
       </nav>
     </header>

@@ -12,9 +12,9 @@ export function GlassBackdrop({
     <div className={className} aria-hidden="true">
       <motion.div
         className="absolute inset-0"
-        initial={{ opacity: 0, scale: 1.06 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+        initial={{ opacity: 0, scale: 1.18, filter: 'blur(28px)' }}
+        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+        transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
       >
         <GradientWave />
       </motion.div>
