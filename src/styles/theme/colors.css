@@ -1,0 +1,45 @@
+:root {
+  /* Nivel 1: Primitivos */
+  --color-violet-50: #f6f1ff;
+  --color-violet-100: #ece1ff;
+  --color-violet-200: #d6c2ff;
+  --color-violet-300: #b89aff;
+  --color-violet-400: #9b75f5;
+  --color-violet-500: #8b5cf6;
+  --color-violet-600: #7c3aed;
+  --color-violet-700: #6d28d9;
+
+  --color-pink-200: #f5d0ff;
+  --color-pink-300: #efb8ff;
+
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f7;
+  --color-neutral-200: #e5e5ea;
+  --color-neutral-700: #2c2c2e;
+  --color-neutral-900: #111113;
+
+  /* Nivel 2: Semánticos */
+  --color-primary: var(--color-violet-500);
+  --color-primary-hover: var(--color-violet-600);
+
+  /* Nivel 3: Aplicación */
+  --bg-app: var(--color-neutral-100);
+  --bg-surface: var(--color-neutral-0);
+  --text-primary: var(--color-neutral-900);
+  --text-secondary: var(--color-neutral-700);
+  --text-on-primary: var(--color-neutral-0);
+  --border-default: var(--color-neutral-200);
+
+  /* Nivel 4: Componentes */
+  --hero-gradient-from: var(--color-violet-300);
+  --hero-gradient-via: var(--color-violet-400);
+  --hero-gradient-to: var(--color-violet-600);
+  --hero-text: var(--color-neutral-0);
+  --hero-grid-line: rgba(255, 255, 255, 0.18);
+  --hero-grid-fill: rgba(255, 255, 255, 0.04);
+  --hero-chip-bg: rgba(255, 255, 255, 0.16);
+  --hero-chip-border: rgba(255, 255, 255, 0.32);
+  --hero-icon-bg: rgba(255, 255, 255, 0.92);
+  --hero-icon-color: var(--color-neutral-900);
+}
