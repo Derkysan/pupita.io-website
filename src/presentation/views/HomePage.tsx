@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { TextAnimate } from "../components/text-pull-up"
-import { MdOutlineEmail, MdClose, MdArrowOutward } from "react-icons/md"
+import { MdArrowOutward } from "react-icons/md"
 import { ContactForm } from "../components/contact-form"
 
 const EASE = [0.22, 1, 0.36, 1] as const
@@ -14,7 +14,7 @@ const MAILTO =
   )}`
 
 export function HomePage() {
-  const [isContactOpen, setIsContactOpen] = useState(false)
+  const [isContactOpen] = useState(false)
 
   return (
     <main className="bg-mauve-900 h-svh flex flex-col px-5 md:px-10 py-4">
@@ -54,7 +54,7 @@ export function HomePage() {
           </div>
 
           {/* Right: Logo + button */}
-          <div className="flex flex-col justify-between order-1 md:order-2 md:col-span-3 uppercase tracking-widest font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-right text-white pb-6">
+          <div className="flex flex-col justify-between order-1 md:order-2 md:col-span-3 uppercase tracking-widest font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-right text-white pb-10">
             <div>
               <TextAnimate mode="letters" stagger={0.025} duration={0.4}>PUPITA</TextAnimate>
               <span className="text-pink-400"><TextAnimate mode="letters" stagger={0.025} duration={0.4} delay={0.12}>.</TextAnimate></span>
@@ -70,10 +70,10 @@ export function HomePage() {
               >
                 <a
                   href={MAILTO}
-                  className="group flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors duration-200 normal-case tracking-normal font-normal"
+                  className="group flex items-center gap-2 text-base text-gray-500 hover:text-white transition-colors duration-200 normal-case tracking-normal font-normal"
                 >
                   contact@pupita.io
-                  <MdArrowOutward className="text-base group-hover:text-pink-400 transition-colors duration-200" />
+                  <MdArrowOutward className="text-sm transition-colors duration-200" />
                 </a>
               </motion.div>
 
@@ -162,7 +162,7 @@ export function HomePage() {
         {/* Row 3: Footer */}
         <div className="flex-1 min-h-0 text-white flex items-center md:grid md:grid-cols-5 md:gap-10 md:row-span-1">
 
-          {/* Mobile footer: copyright | button | powered by */}
+          {/* Mobile footer: copyright | mailto */}
           <div className="flex md:hidden w-full items-center justify-between text-xs">
             <motion.div
               initial={{ opacity: 0 }}
@@ -186,15 +186,6 @@ export function HomePage() {
                 contact@pupita.io
                 <MdArrowOutward className="text-sm group-hover:text-pink-400 transition-colors duration-200" />
               </a>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 0.75 }}
-              viewport={{ once: true }}
-              transition={{ delay: 1.4, duration: 0.5, ease: "easeOut" }}
-            >
-              <span className="text-gray-500">Powered by PUPITA.IO</span>
             </motion.div>
           </div>
 
