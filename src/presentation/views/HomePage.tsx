@@ -1,10 +1,17 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { TextAnimate } from "../components/text-pull-up"
-import { MdOutlineEmail, MdClose } from "react-icons/md"
+import { MdOutlineEmail, MdClose, MdArrowOutward } from "react-icons/md"
 import { ContactForm } from "../components/contact-form"
 
 const EASE = [0.22, 1, 0.36, 1] as const
+
+const MAILTO =
+  `mailto:contact@pupita.io` +
+  `?subject=${encodeURIComponent('Hola desde Pupita.io')}` +
+  `&body=${encodeURIComponent(
+    'Hola equipo de Pupita,\n\nMe interesa conocer más sobre sus servicios de desarrollo.\n\nProyecto / Consulta:\n[Cuéntanos sobre tu idea o proyecto]\n\nQuedo atento.'
+  )}`
 
 export function HomePage() {
   const [isContactOpen, setIsContactOpen] = useState(false)
@@ -56,43 +63,18 @@ export function HomePage() {
             <div className="flex flex-col items-end gap-2">
               <motion.div
                 className="hidden md:flex justify-end"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 1.4, duration: 0.4, ease: EASE }}
               >
-                <button
-                  onClick={() => setIsContactOpen(v => !v)}
-                  className="group w-8 aspect-square rounded-full flex items-center justify-center hover:bg-mauve-800 transition duration-150 ease-linear"
+                <a
+                  href={MAILTO}
+                  className="group flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors duration-200 normal-case tracking-normal font-normal"
                 >
-                  <span className="inline-flex group-hover:scale-105 transition duration-150 ease-linear text-gray-600 hover:text-gray-400">
-                    <AnimatePresence mode="wait" initial={false}>
-                      {isContactOpen ? (
-                        <motion.span
-                          key="close"
-                          initial={{ opacity: 0, rotate: -90 }}
-                          animate={{ opacity: 1, rotate: 0 }}
-                          exit={{ opacity: 0, rotate: 90 }}
-                          transition={{ duration: 0.2 }}
-                          className="inline-flex"
-                        >
-                          <MdClose className="text-lg" />
-                        </motion.span>
-                      ) : (
-                        <motion.span
-                          key="mail"
-                          initial={{ opacity: 0, rotate: 90 }}
-                          animate={{ opacity: 1, rotate: 0 }}
-                          exit={{ opacity: 0, rotate: -90 }}
-                          transition={{ duration: 0.2 }}
-                          className="inline-flex"
-                        >
-                          <MdOutlineEmail className="text-lg" />
-                        </motion.span>
-                      )}
-                    </AnimatePresence>
-                  </span>
-                </button>
+                  contact@pupita.io
+                  <MdArrowOutward className="text-base group-hover:text-pink-400 transition-colors duration-200" />
+                </a>
               </motion.div>
 
               {/* Línea corta bajo el botón — solo desktop */}
@@ -192,29 +174,18 @@ export function HomePage() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 1.4, duration: 0.4, ease: EASE }}
             >
-              <button
-                onClick={() => setIsContactOpen(v => !v)}
-                className="group w-8 aspect-square rounded-full flex items-center justify-center hover:bg-mauve-800 transition duration-150 ease-linear"
+              <a
+                href={MAILTO}
+                className="group flex items-center gap-1.5 text-xs text-gray-500 hover:text-white transition-colors duration-200 normal-case tracking-normal font-normal"
               >
-                <span className="inline-flex group-hover:scale-105 transition duration-150 ease-linear text-gray-600 hover:text-gray-400">
-                  <AnimatePresence mode="wait" initial={false}>
-                    {isContactOpen ? (
-                      <motion.span key="close" initial={{ opacity: 0, rotate: -90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 90 }} transition={{ duration: 0.2 }} className="inline-flex">
-                        <MdClose className="text-lg" />
-                      </motion.span>
-                    ) : (
-                      <motion.span key="mail" initial={{ opacity: 0, rotate: 90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: -90 }} transition={{ duration: 0.2 }} className="inline-flex">
-                        <MdOutlineEmail className="text-lg" />
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-                </span>
-              </button>
+                contact@pupita.io
+                <MdArrowOutward className="text-sm group-hover:text-pink-400 transition-colors duration-200" />
+              </a>
             </motion.div>
 
             <motion.div
