@@ -15,10 +15,15 @@ const contactSchema = z.object({
   mensaje: z.string().min(10),
 })
 
-app.use(cors({ origin: process.env.CLIENT_ORIGIN ?? 'http://localhost:5173' }))
+app.use(cors({
+  origin: process.env.CLIENT_ORIGIN
+    ? process.env.CLIENT_ORIGIN.split(',').map(o => o.trim())
+    : 'http://localhost:5173',
+}))
 app.use(express.json())
 
-app.post('/api/contact', async (req, res) => {
+// DO App Platform strips the /api prefix before forwarding — register both paths
+app.post(['/contact', '/api/contact'], async (req, res) => {
   const result = contactSchema.safeParse(req.body)
   if (!result.success) {
     res.status(400).json({ error: 'Datos inválidos' })
