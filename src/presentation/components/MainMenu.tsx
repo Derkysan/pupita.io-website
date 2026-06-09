@@ -1,15 +1,13 @@
 import { MdOutlineMailOutline } from 'react-icons/md';
-import { TextAnimate } from '../text-pull-up'
 import { motion } from 'framer-motion';
+import { TextAnimate } from './text-pull-up';
 
-import type { HeaderProps } from './Header.types'
-
-export function Header({ logo = 'pupita.io', right, className = '' }: HeaderProps) {
+export const MainMenu = () => {
   return (
-    <header className={`h-20 ${className}`.trim()}>
-      <nav className="max-w-10/12 lg:max-w-11/12 h-full flex items-center mx-auto relative z-40">
+    <header className={`h-20`.trim()}>
+      <nav className="max-w-10/12 lg:max-w-12/12 h-full flex items-center mx-auto relative z-40 px-5">
         <div className="uppercase tracking-widest font-bold">
-          <TextAnimate mode="letters" stagger={0.04}>{logo}</TextAnimate>
+          <TextAnimate mode="letters" stagger={0.04}>pupita.io</TextAnimate>
         </div>
         <div className="flex ml-auto">
           <motion.a
@@ -22,8 +20,7 @@ export function Header({ logo = 'pupita.io', right, className = '' }: HeaderProp
             <MdOutlineMailOutline />
           </motion.a>
         </div>
-        {right && <div className="ml-auto">{right}</div>}
       </nav>
     </header>
-  )
-}
+  );
+};

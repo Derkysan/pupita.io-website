@@ -3,21 +3,26 @@ import { motion, type Variants } from 'framer-motion'
 import { resolveResponsive, useBreakpoint } from '@/hooks'
 import type { GlassGridProps } from './GlassGrid.types'
 
+const CYCLE_INTERVAL_MS = 10_000
+const EXIT_DURATION_MS = 1_600
+
 const gridVariants: Variants = {
   hidden: {},
   visible: {},
 }
 
 const gridMobileVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.93, filter: 'blur(10px)' },
-  visible: {
-    opacity: 1, scale: 1, filter: 'blur(0px)',
-    transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] },
-  },
+  hidden: { opacity: 0, scale: 0.93, filter: 'blur(10px)', transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] } },
+  visible: { opacity: 1, scale: 1, filter: 'blur(0px)', transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] } },
 }
 
 const cellVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.6, y: 8 },
+  hidden: (diag: number) => ({
+    opacity: 0,
+    scale: 0.6,
+    y: 8,
+    transition: { duration: 0.45, ease: [0.4, 0, 0.6, 1], delay: diag * 0.03 },
+  }),
   visible: (diag: number) => ({
     opacity: 0.5,
     scale: 1,
@@ -27,8 +32,8 @@ const cellVariants: Variants = {
 }
 
 const cellMobileVariants: Variants = {
-  hidden: {},
-  visible: { opacity: 0.5 },
+  hidden: { opacity: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
+  visible: { opacity: 0.5, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
 }
 
 const DEFAULT_COLS = { base: 5, sm: 7, md: 9, lg: 12, xl: 14 }
@@ -47,6 +52,25 @@ export function GlassGrid({
   const ref = useRef<HTMLDivElement>(null)
   const [rows, setRows] = useState<number>(0)
   const [cellHeight, setCellHeight] = useState<number>(0)
+  const [animateState, setAnimateState] = useState<'hidden' | 'visible'>('visible')
+  const cycleTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    const schedule = () => {
+      cycleTimer.current = setTimeout(() => {
+        setAnimateState('hidden')
+        cycleTimer.current = setTimeout(() => {
+          setAnimateState('visible')
+          schedule()
+        }, EXIT_DURATION_MS)
+      }, CYCLE_INTERVAL_MS)
+    }
+
+    schedule()
+    return () => {
+      if (cycleTimer.current) clearTimeout(cycleTimer.current)
+    }
+  }, [])
 
   useEffect(() => {
     const el = ref.current
@@ -85,7 +109,7 @@ export function GlassGrid({
       aria-hidden="true"
       variants={isMobile ? gridMobileVariants : gridVariants}
       initial="hidden"
-      animate="visible"
+      animate={animateState}
     >
       {Array.from({ length: cells }, (_, i) => {
         const row = Math.floor(i / resolvedCols)

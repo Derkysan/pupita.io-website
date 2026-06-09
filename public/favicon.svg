@@ -1,25 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%"   stop-color="#c4b5fd"/>
-      <stop offset="55%"  stop-color="#8b5cf6"/>
-      <stop offset="100%" stop-color="#6d28d9"/>
-    </linearGradient>
-    <radialGradient id="pink" cx="85%" cy="15%" r="55%">
-      <stop offset="0%"   stop-color="#f5d0ff" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#f5d0ff" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-  <rect width="32" height="32" rx="7" fill="url(#bg)"/>
-  <rect width="32" height="32" rx="7" fill="url(#pink)"/>
-  <text
-    x="16"
-    y="22"
-    font-family="'Outfit', system-ui, sans-serif"
-    font-size="22"
-    font-weight="700"
-    fill="white"
-    text-anchor="middle"
-    letter-spacing="-0.5"
-  >P.</text>
+  <style>
+    text {
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      text-anchor: middle;
+    }
+    @media (prefers-color-scheme: light) {
+      text { fill: #5b21b6; }
+    }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #ddd6fe; }
+    }
+  </style>
+  <text x="16" y="23">P.</text>
 </svg>
