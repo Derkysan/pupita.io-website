@@ -91,11 +91,14 @@ export const TextAnimate: React.FC<TextAnimateProps> = ({
           animate: 'visible' as const,
         }
 
+  const clipStyle = clip ? { clipPath: 'inset(0 0 -0.3em 0)' } : undefined
+
   const renderLetter = (char: string, key: React.Key) => (
     <span
       key={key}
       aria-hidden="true"
-      className={cn('inline-block align-bottom', clip && 'overflow-hidden')}
+      className={cn('inline-block align-bottom')}
+      style={clipStyle}
     >
       <motion.span variants={itemVariants} className={cn('inline-block', itemClassName)}>
         {char}
@@ -128,7 +131,8 @@ export const TextAnimate: React.FC<TextAnimateProps> = ({
               <span
                 key={i}
                 aria-hidden="true"
-                className={cn('inline-block align-bottom', clip && 'overflow-hidden')}
+                className={cn('inline-block align-bottom')}
+                style={clipStyle}
               >
                 <motion.span variants={itemVariants} className={cn('inline-block', itemClassName)}>
                   {token}
