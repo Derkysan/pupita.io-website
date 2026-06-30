@@ -33,11 +33,6 @@ const pVariants = {
   exit: { opacity: 0, transition: { duration: 0.15 } },
 }
 
-const arrowVariants = {
-  hidden: { opacity: 0, scale: 0.65 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: EASE } },
-  exit: { opacity: 0, scale: 0.8, transition: { duration: 0.15 } },
-}
 
 export const HeroSliderCard = () => {
   const { slides, currentIndex, autoPlay, interval, showProgress } = useHeroSlider()
