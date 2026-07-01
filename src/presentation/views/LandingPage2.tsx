@@ -94,7 +94,7 @@ const ContactForm = ({ onSent, onClose, onActivity }: { onSent: () => void; onCl
         <div>
           <textarea
             {...register('message')}
-            placeholder="Contanos tu idea..."
+            placeholder="Cuéntanos tu idea..."
             rows={5}
             className="w-full bg-mauve-600 rounded-lg px-3 py-2 text-sm placeholder:text-white/30 outline-none focus:ring-1 focus:ring-white/20 resize-none"
           />
@@ -233,7 +233,7 @@ export const LandingPage2 = () => {
                 <span className="text-pink-400">
                   <TextAnimate mode="letters" stagger={0.025} duration={0.4} delay={0.12}>.</TextAnimate>
                 </span>
-                <TextAnimate mode="letters" stagger={0.025} duration={0.4} delay={0.15}>IO</TextAnimate>
+                <TextAnimate mode="letters" stagger={0.025} duration={0.4} delay={0.15}>io</TextAnimate>
               </div>
               <SliderControls />
             </div>
