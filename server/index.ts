@@ -9,6 +9,15 @@ const port = process.env.PORT ?? 3001
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
+// Escapa los datos del formulario antes de insertarlos en el HTML del correo
+const escapeHtml = (value: string) =>
+  value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+
 const contactSchema = z.object({
   nombre: z.string().min(2),
   email: z.string().email(),
@@ -40,9 +49,9 @@ app.post(['/contact', '/api/contact'], async (req, res) => {
       replyTo: email,
       subject: `Nuevo contacto de ${nombre}`,
       html: `
-        <p><strong>Nombre:</strong> ${nombre}</p>
-        <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-        <p><strong>Mensaje:</strong><br>${mensaje.replace(/\n/g, '<br>')}</p>
+        <p><strong>Nombre:</strong> ${escapeHtml(nombre)}</p>
+        <p><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
+        <p><strong>Mensaje:</strong><br>${escapeHtml(mensaje).replace(/\n/g, '<br>')}</p>
       `,
     })
 
