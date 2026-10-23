@@ -20,7 +20,8 @@ app.use(cors({
     ? process.env.CLIENT_ORIGIN.split(',').map(o => o.trim())
     : 'http://localhost:5173',
 }))
-app.use(express.json())
+// inflate: false — no descomprimir cuerpos gzip/deflate/br (CVE-2026-111497)
+app.use(express.json({ inflate: false }))
 
 // DO App Platform strips the /api prefix before forwarding — register both paths
 app.post(['/contact', '/api/contact'], async (req, res) => {
